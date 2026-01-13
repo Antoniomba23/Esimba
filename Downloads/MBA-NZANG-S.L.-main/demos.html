@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Laboratory - MBA NZANG S.L.</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        .demos-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 100px 0 80px;
+            text-align: center;
+            color: white;
+        }
+
+        .demos-hero h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .demos-hero p {
+            font-size: 1.3em;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.95;
+        }
+
+        .demo-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .demo-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .demo-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .demo-icon {
+            font-size: 3em;
+            margin-right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .demo-title h2 {
+            margin: 0;
+            font-size: 2em;
+            color: #333;
+        }
+
+        .demo-title p {
+            margin: 5px 0 0;
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .demo-interface {
+            margin-top: 30px;
+        }
+
+        .chat-demo {
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+
+        .chat-message .message-bubble {
+            max-width: 70%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            font-size: 0.95em;
+            line-height: 1.4;
+        }
+
+        .chat-message.bot .message-bubble {
+            background: #667eea;
+            color: white;
+        }
+
+        .chat-message.user .message-bubble {
+            background: #e0e0e0;
+            color: #333;
+        }
+
+        .chat-input-area {
+            display: flex;
+            padding: 15px;
+            background: white;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input-area input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-input-area button {
+            margin-left: 10px;
+            padding: 12px 25px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .chat-input-area button:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-input-area button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .text-analysis-demo textarea {
+            width: 100%;
+            min-height: 200px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .text-analysis-demo textarea:focus {
+            border-color: #667eea;
+        }
+
+        .analyze-btn {
+            margin-top: 15px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: transform 0.2s;
+        }
+
+        .analyze-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .analyze-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-area {
+            margin-top: 30px;
+            padding: 25px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            display: none;
+        }
+
+        .result-area.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #667eea;
+        }
+
+        .loading i {
+            font-size: 2em;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            color: #856404;
+        }
+
+        .disclaimer i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h2 translate="no">MBA NZANG S.L.</h2>
+                <p class="tagline">Arquitectos de Inteligencia Artificial</p>
+            </div>
+            <nav>
+                <div class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li class="active"><a href="demos.html">Demos IA</a></li>
+                    <li><a href="empresa.html">Empresa</a></li>
+                    <li><a href="proyectos-galeria.html">Proyectos</a></li>
+                    <li><a href="contacto.html">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="demos-hero">
+        <div class="container">
+            <h1>🧪 AI Laboratory</h1>
+            <p>Experimenta el poder de la Inteligencia Artificial en acción. Prueba nuestras demos interactivas y
+                descubre cómo la IA puede transformar tu negocio.</p>
+        </div>
+    </section>
+
+    <div class="demo-container">
+        <!-- Demo 1: Asistente Inmobiliario -->
+        <div class="demo-card" id="demo-inmobiliaria">
+            <div class="demo-header">
+                <div class="demo-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="demo-title">
+                    <h2>Asistente Inmobiliario Inteligente</h2>
+                    <p>Chatbot con IA que conoce propiedades en Malabo y ayuda a encontrar la casa perfecta</p>
+                </div>
+            </div>
+            <div class="demo-interface">
+                <div class="chat-demo">
+                    <div class="chat-messages" id="chat-inmobiliaria">
+                        <div class="chat-message bot">
+                            <div class="message-bubble">
+                                ¡Hola! Soy tu asistente inmobiliario virtual. Tengo información sobre propiedades
+                                disponibles en Malabo. ¿Qué tipo de propiedad estás buscando?
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" id="input-inmobiliaria"
+                            placeholder="Ej: Busco una casa de 3 habitaciones en Malabo II...">
+                        <button id="send-inmobiliaria"><i class="fas fa-paper-plane"></i> Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo 2: Análisis Legal -->
+        <div class="demo-card" id="demo-legal">
+            <div class="demo-header">
+                <div class="demo-icon">
+                    <i class="fas fa-gavel"></i>
+                </div>
+                <div class="demo-title">
+                    <h2>Análisis Legal de Contratos</h2>
+                    <p>IA que revisa contratos y detecta riesgos potenciales</p>
+                </div>
+            </div>
+            <div class="demo-interface text-analysis-demo">
+                <textarea id="contract-text" placeholder="Pega aquí el texto de tu contrato para análisis...
+
+Ejemplo:
+CONTRATO DE ARRENDAMIENTO
+
+Entre el arrendador Juan Pérez y el arrendatario María García, se acuerda:
+1. El arrendamiento de la vivienda ubicada en Malabo II por 12 meses.
+2. Renta mensual de 500,000 XAF pagadera los días 1 de cada mes.
+3. El arrendatario debe realizar todas las reparaciones necesarias.
+4. El arrendador puede rescindir el contrato en cualquier momento sin previo aviso.
+5. Depósito de garantía de 1,500,000 XAF no reembolsable."></textarea>
+                <button class="analyze-btn" id="analyze-contract">
+                    <i class="fas fa-search"></i> Analizar Contrato
+                </button>
+                <div class="result-area" id="legal-result"></div>
+                <div class="disclaimer">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>Aviso:</strong> Este es un análisis preliminar generado por IA. Para decisiones legales
+                    importantes, consulte con un abogado profesional.
+                </div>
+            </div>
+        </div>
+
+        <!-- Demo 3: Calculadora de Proyectos -->
+        <div class="demo-card" id="demo-calculadora">
+            <div class="demo-header">
+                <div class="demo-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="demo-title">
+                    <h2>Calculadora de Proyectos con IA</h2>
+                    <p>Describe tu proyecto y obtén una estimación de costo y tiempo en segundos</p>
+                </div>
+            </div>
+            <div class="demo-interface text-analysis-demo">
+                <textarea id="project-description"
+                    placeholder="Describe tu proyecto aquí...
+
+Ejemplo:
+Necesito una aplicación web para mi restaurante que permita a los clientes hacer reservas online, ver el menú con fotos, y hacer pedidos para llevar. También quiero un panel de administración para gestionar las mesas, pedidos y el inventario. Me gustaría que tenga integración con WhatsApp para notificaciones."></textarea>
+                <button class="analyze-btn" id="calculate-project">
+                    <i class="fas fa-magic"></i> Calcular Estimación
+                </button>
+                <div class="result-area" id="calculator-result"></div>
+                <div class="disclaimer">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Nota:</strong> Esta es una estimación preliminar. Para una cotización exacta, agenda una
+                    consulta gratuita con nuestro equipo.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="img/logo.JPG" alt="MBA NZANG S.L. Logo">
+                    </div>
+                    <p>Pioneros en Inteligencia Artificial y desarrollo web en Guinea Ecuatorial. Transformamos negocios
+                        con tecnología de vanguardia.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="demos.html">Demos IA</a></li>
+                        <li><a href="empresa.html">Empresa</a></li>
+                        <li><a href="proyectos-galeria.html">Proyectos</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contacto</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Malabo, Guinea Ecuatorial</li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/240222704373" target="_blank"
+                                rel="noopener noreferrer">+240 222 704 373</a></li>
+                        <li><i class="fas fa-envelope"></i> infombanzang@gmail.com</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Síguenos</h3>
+                    <div class="social-media">
+                        <a href="https://www.instagram.com/mba_nzang_s.l/" target="_blank" rel="noopener noreferrer"
+                            class="social-icon social-instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/@mba_nzang_sl" target="_blank" rel="noopener noreferrer"
+                            class="social-icon social-tiktok"><i class="fab fa-tiktok"></i></a>
+                        <a href="https://wa.me/240222704373" target="_blank" rel="noopener noreferrer"
+                            class="social-icon social-whatsapp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 MBA NZANG S.L. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/demos.js"></script>
+</body>
+
+</html>
